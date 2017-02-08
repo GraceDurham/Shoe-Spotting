@@ -1,11 +1,12 @@
-"""Movie Ratings."""
+"""Shoe Ratings."""
 
 from jinja2 import StrictUndefined
+import sqlalchemy
 
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, User, Movie, Rating
+from model import connect_to_db, db, User, Post, Comment
 
 
 app = Flask(__name__)
@@ -20,42 +21,41 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def index():
-    """Homepage."""
-
-    return render_template("homepage.html")
-
-
-@app.route('/register', methods=['GET'])
-def register_form():
-    """Show form for user signup."""
-
-    return render_template("register_form.html")
+    """Welcome page"""
+    return render_template("Welcome.html")
 
 
-@app.route('/register', methods=['POST'])
-def register_process():
-    """Process registration."""
+# @app.route('/register', methods=['GET'])
+# def register_form():
+#     """Show form for user signup."""
 
-    # Get form variables
-    email = request.form["email"]
-    password = request.form["password"]
-    age = int(request.form["age"])
-    zipcode = request.form["zipcode"]
+#     return render_template("register_form.html")
 
-    new_user = User(email=email, password=password, age=age, zipcode=zipcode)
 
-    db.session.add(new_user)
-    db.session.commit()
+# @app.route('/register', methods=['POST'])
+# def register_process():
+#     """Process registration."""
 
-    flash("User %s added." % email)
-    return redirect("/")
+#     # Get form variables
+#     email = request.form["email"]
+#     password = request.form["password"]
+#     age = int(request.form["age"])
+#     zipcode = request.form["zipcode"]
+
+#     new_user = User(email=email, password=password, age=age, zipcode=zipcode)
+
+#     db.session.add(new_user)
+#     db.session.commit()
+
+#     flash("User %s added." % email)
+#     return redirect("/")
 
 
 @app.route('/login', methods=['GET'])
 def login_form():
     """Show login form."""
 
-    return render_template("login_form.html")
+    return render_template("login.html")
 
 
 @app.route('/login', methods=['POST'])
@@ -79,7 +79,7 @@ def login_process():
     session["user_id"] = user.user_id
 
     flash("Logged in")
-    return redirect("/users/%s" % user.user_id)
+    return render_template("profile.html")
 
 
 @app.route('/logout')
@@ -90,89 +90,56 @@ def logout():
     flash("Logged Out.")
     return redirect("/")
 
+@app.route('/feed')
+def feed():
+    """Gets posts for all the posts"""
+    posts = Post.query.all()
 
-@app.route("/users")
-def user_list():
-    """Show list of users."""
-
-    users = User.query.all()
-    return render_template("user_list.html", users=users)
-
-
-@app.route("/users/<int:user_id>")
-def user_detail(user_id):
-    """Show info about user."""
-
-    user = User.query.get(user_id)
-    return render_template("user.html", user=user)
+    return render_template("shoe_feed.html", posts=posts)
 
 
-@app.route("/movies")
-def movie_list():
-    """Show list of movies."""
+@app.route('/add-post')
+def pop_add_post():
+    """ Allows users to add post when click on add-post button on feed"""
 
-    movies = Movie.query.order_by('title').all()
-    return render_template("movie_list.html", movies=movies)
+    pass
 
+    return render_template("add_post.html")
 
-@app.route("/movies/<int:movie_id>", methods=['GET'])
-def movie_detail(movie_id):
-    """Show info about movie.
+@app.route('/add-post', methods=['POST'])
+def add_post():
+    """add post to the database and return feed"""
 
-    If a user is logged in, let them add/edit a rating.
-    """
+    pass
 
-    movie = Movie.query.get(movie_id)
+    return render_template("shoe_feed.html")
 
-    user_id = session.get("user_id")
+@app.route('/add_comment')
+def pop_add_comment():
+    """ Allows users to add comments when click on add-comment button on feed"""
 
-    if user_id:
-        user_rating = Rating.query.filter_by(
-            movie_id=movie_id, user_id=user_id).first()
+    pass
 
-    else:
-        user_rating = None
-
-    return render_template("movie.html",
-                           movie=movie,
-                           user_rating=user_rating)
+    return render_template("add_comment.html")
 
 
-@app.route("/movies/<int:movie_id>", methods=['POST'])
-def movie_detail_process(movie_id):
-    """Add/edit a rating."""
+@app.route('/add_comment', methods=['Post'])
+def add_comment():
+    """ add comment to the database"""
 
-    # Get form variables
-    score = int(request.form["score"])
+    pass
 
-    user_id = session.get("user_id")
-    if not user_id:
-        raise Exception("No user logged in.")
-
-    rating = Rating.query.filter_by(user_id=user_id, movie_id=movie_id).first()
-
-    if rating:
-        rating.score = score
-        flash("Rating updated.")
-
-    else:
-        rating = Rating(user_id=user_id, movie_id=movie_id, score=score)
-        flash("Rating added.")
-        db.session.add(rating)
-
-    db.session.commit()
-
-    return redirect("/movies/%s" % movie_id)
+    return rendertemplate("shoe_feed.html")
 
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
     app.debug = True
-
+    app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
     connect_to_db(app)
 
     # Use the DebugToolbar
     DebugToolbarExtension(app)
 
-    app.run()
+    app.run(host="0.0.0.0")

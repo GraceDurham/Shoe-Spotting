@@ -43,11 +43,11 @@ class Post(db.Model):
     img_url = db.Column(db.String(100), nullable=True)
     added_at = db.Column(db.DateTime)
     title = db.Column(db.String(50))
-    user_id = db.column(db.Integer, ForeignKey=True)
-    text = db.column(db.String(200))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    text = db.Column(db.String(200))
 
     #Define relationship with User table 
-    user = db.relationship("User", backref=('posts')
+    user = db.relationship("User", backref='posts')
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -71,11 +71,11 @@ class Comment(db.Model):
     added_at = db.Column(db.DateTime)
 
     #Define a relationship to Users
-    user = db.relationship("User", backref=('comments')
+    user = db.relationship("User", backref='comments')
 
     #Define a relationship to Posts
 
-    user = db.relationship("User", backref=('posts')
+    post = db.relationship("Post", backref='comments')
 
     
     def __repr__(self):
@@ -83,7 +83,7 @@ class Comment(db.Model):
 
         s = "<Comment comment_id=%s user_id=%s post_id=%s text=%s added_at=%s>"
         return s % (self.comment_id, self.user_id, self.post_id,
-                    self.text self.added_at)
+                    self.text, self.added_at)
 
 
 #####################################################################
@@ -93,7 +93,7 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PostgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///ratings'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///shoespotting'
     db.app = app
     db.init_app(app)
 
