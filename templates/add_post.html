@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>Add Post</h1>
+    <form action="/add-post" method="POST">
+    <div>
+      <label>img url:
+        <input type="text" name="img_url">
+    </div>
+     <div>
+        <label>Title:
+          <input type="title" name="title">
+        </label>
+    </div>
+    <div>
+        <label>Comment:
+          <input type="text" name="text">
+        </label>
+    </div>
+    <div>
+        <input type="submit" value="Add Shoe Post">
+    </div>
+    </form>
+  
+{% endblock %}

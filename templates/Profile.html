@@ -1,8 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1>Profile Page</h1>
-  <ul>
-    
-  </ul>
+    <h1>Your Profile Page</h1>
+    <ul>
+    {% for post in posts %}
+      <li>
+          <a href="/login/{{ post.user_id }}">
+            {{ post.title }} {{ post.text}} <img src="{{ post.img_url}}"/>
+             ({{ post.added_at.strftime("%A, %B %d, %Y")}})
+          </a>
+      </li>
+    {% endfor %}
+      <div>
+           <button type="button" class="btn btn-info"><a href = "/add-post">Add Shoe Post</a></button>
+      </div>
+  
+
 {% endblock %}

@@ -8,6 +8,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Post, Comment
 
+from datetime import datetime
+
 
 app = Flask(__name__)
 
@@ -67,6 +69,7 @@ def login_process():
     password = request.form["password"]
 
     user = User.query.filter_by(email=email).first()
+    print user.user_id
 
     if not user:
         flash("No such user")
@@ -78,8 +81,16 @@ def login_process():
 
     session["user_id"] = user.user_id
 
+    posts = Post.query.filter_by(user_id = user.user_id).all()
+    # print posts[0].img_url
+
+    # query all the posts where user id = user id logged in 
+    #get lists of different post ojects 
+    # format it in the profile html with for loop jinja 
+    # pass variable to render template so it is available in jijna
+
     flash("Logged in")
-    return render_template("profile.html")
+    return render_template("Profile.html", posts=posts)
 
 
 @app.route('/logout')
@@ -95,14 +106,23 @@ def feed():
     """Gets posts for all the posts"""
     posts = Post.query.all()
 
-    return render_template("shoe_feed.html", posts=posts)
+    return render_template("shoefeed.html", posts=posts)
 
 
-@app.route('/add-post')
+@app.route('/profile')
+def profile():
+    """ User logs in and takes user to profile page"""
+
+    posts = Post.query.filter_by(user_id = session["user_id"]).all()
+
+    return render_template("Profile.html", posts=posts)
+
+
+@app.route('/add-post', methods=['GET'])
 def pop_add_post():
-    """ Allows users to add post when click on add-post button on feed"""
+    """ Displays the form"""
 
-    pass
+
 
     return render_template("add_post.html")
 
@@ -110,9 +130,23 @@ def pop_add_post():
 def add_post():
     """add post to the database and return feed"""
 
-    pass
+    print request.form
 
-    return render_template("shoe_feed.html")
+    img_url = request.form["img_url"]
+    title = request.form["title"]
+    text = request.form["text"]
+
+    added_at = datetime.now()
+
+    user_id = session["user_id"]
+    
+    new_post = Post(img_url=img_url, title=title, text=text, user_id=user_id, added_at=added_at)
+
+    db.session.add(new_post)
+    db.session.commit()
+
+
+    return redirect("/profile")
 
 @app.route('/add_comment')
 def pop_add_comment():
@@ -129,13 +163,14 @@ def add_comment():
 
     pass
 
-    return rendertemplate("shoe_feed.html")
+    return rendertemplate("shoefeed.html")
 
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
     app.debug = True
+    app.jinja_env.auto_reload = app.debug
     app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
     connect_to_db(app)
 
