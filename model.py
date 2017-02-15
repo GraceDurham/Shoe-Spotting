@@ -40,9 +40,9 @@ class Post(db.Model):
     post_id = db.Column(db.Integer,
                          autoincrement=True,
                          primary_key=True)
-    img_url = db.Column(db.String(100), nullable=True)
+    img_url = db.Column(db.String(300), nullable=True)
     added_at = db.Column(db.DateTime)
-    title = db.Column(db.String(50))
+    title = db.Column(db.String(300))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     text = db.Column(db.String(200))
 

@@ -2,19 +2,17 @@
 {% block content %}
 
     <h1>Shoe Feed</h1>
-    <div class ="images">
     <ul>
     {% for post in posts %}
       <li>
-          <a href="/login/{{ post.user_id }}">
+          <a href="/post/{{ post.post_id }}">
             {{ post.title }} {{ post.text}} 
-              <img src ="{{ post.img_url}}"/>
+              <img class="shoe-image" src="{{ post.img_url}}"/>
             ({{ post.added_at.strftime("%A, %B %d, %Y")}})
           </a>
       </li>
     {% endfor %}
     </ul>
-  </div>
   
 
 {% endblock %}

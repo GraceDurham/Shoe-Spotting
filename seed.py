@@ -11,18 +11,15 @@ from datetime import datetime
 def load_users():
     """Load users into database."""
 
-    grace = User.query.filter_by(email="gracelee.durham@gmail.com").first()
 
-    if(grace == None):
-        grace = User(email="gracelee.durham@gmail.com", password="password")
-        db.session.add(grace)
-        db.session.commit()
+    grace = User(email="gracelee.durham@gmail.com", password="password")
+    db.session.add(grace)
+    db.session.commit()
 
-
+## commenting out load posts because users are going to be inputting this info via Flask
 def load_posts():
     """Load posts into database."""
     #deletes duplicates from the Post database when seed.py is ran
-    Post.query.delete()
 
     img_url = "http://a3.zassets.com/images/z/3/9/0/2/7/5/3902757-p-MULTIVIEW.jpg"
     
@@ -67,6 +64,10 @@ if __name__ == "__main__":
     connect_to_db(app)
     db.create_all()
 
-    load_users()
-    load_posts()
+    grace = User.query.filter_by(email="gracelee.durham@gmail.com").first()
+    
+    #If grace is not there then we know we need to seed the database
+    if(grace == None):
+        load_users()
+        load_posts()
   

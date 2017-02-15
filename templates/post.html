@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div>
+    {{ post.title }} {{ post.text}} 
+    <img class="shoe-image" src="{{ post.img_url}}"/>
+    ({{ post.added_at.strftime("%A, %B %d, %Y")}})
+</div>
+
+    
+    
+
+{% endblock %}

@@ -163,8 +163,14 @@ def add_comment():
 
     pass
 
-    return rendertemplate("shoefeed.html")
+    return render_template("shoefeed.html")
 
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    post = Post.query.get(post_id)
+    
+    return render_template("post.html", post=post)
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
