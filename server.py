@@ -3,7 +3,7 @@
 from jinja2 import StrictUndefined
 import sqlalchemy
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Post, Comment
@@ -24,7 +24,7 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """Welcome page"""
-    return render_template("Welcome.html")
+    return render_template("welcome.html")
 
 
 # @app.route('/register', methods=['GET'])
@@ -90,7 +90,7 @@ def login_process():
     # pass variable to render template so it is available in jijna
 
     flash("Logged in")
-    return render_template("Profile.html", posts=posts)
+    return render_template("profile.html", posts=posts)
 
 
 @app.route('/logout')
@@ -100,6 +100,7 @@ def logout():
     del session["user_id"]
     flash("Logged Out.")
     return redirect("/")
+
 
 @app.route('/feed')
 def feed():
@@ -113,18 +114,17 @@ def feed():
 def profile():
     """ User logs in and takes user to profile page"""
 
-    posts = Post.query.filter_by(user_id = session["user_id"]).all()
+    posts = Post.query.filter_by(user_id=session["user_id"]).all()
 
-    return render_template("Profile.html", posts=posts)
+    return render_template("profile.html", posts=posts)
 
 
 @app.route('/add-post', methods=['GET'])
 def pop_add_post():
     """ Displays the form"""
 
-
-
     return render_template("add_post.html")
+
 
 @app.route('/add-post', methods=['POST'])
 def add_post():
@@ -148,29 +148,36 @@ def add_post():
 
     return redirect("/profile")
 
-@app.route('/add_comment')
-def pop_add_comment():
-    """ Allows users to add comments when click on add-comment button on feed"""
-
-    pass
-
-    return render_template("add_comment.html")
-
 
 @app.route('/add_comment', methods=['Post'])
 def add_comment():
     """ add comment to the database"""
 
-    pass
+    comments = request.form["comments"]
+    post_id = request.form["post_id"]
 
-    return render_template("shoefeed.html")
+    added_at = datetime.now()
+
+    user_id = session["user_id"]
+    
+    new_comment = Comment(user_id=user_id, post_id=post_id, text=comments, added_at=added_at)
+
+    db.session.add(new_comment)
+    db.session.commit()
+
+    return redirect("/post/" + str(post_id))
+
 
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
     # show the post with the given id, the id is an integer
     post = Post.query.get(post_id)
+
+
+    comments = Comment.query.filter_by(post_id=post_id).all() # filter comments by post_id, pass comments to template
     
-    return render_template("post.html", post=post)
+    return render_template("post.html", post=post, comments=comments)
+
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point

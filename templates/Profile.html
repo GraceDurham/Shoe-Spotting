@@ -2,6 +2,9 @@
 {% block content %}
 
     <h1>Your Profile Page</h1>
+    <div>
+       <button type="button" class="btn btn-info"><a href = "/add-post">Add Shoe Post</a></button>
+    </div>
     <ul>
     {% for post in posts %}
       <li>
@@ -12,9 +15,7 @@
           </a>
       </li>
     {% endfor %}
-      <div>
-           <button type="button" class="btn btn-info"><a href = "/add-post">Add Shoe Post</a></button>
-      </div>
+
   
 
 {% endblock %}

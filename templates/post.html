@@ -1,14 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
 <div>
-    {{ post.title }} {{ post.text}} 
+    {{ post.title }} {{ post.text}}
     <img class="shoe-image" src="{{ post.img_url}}"/>
     ({{ post.added_at.strftime("%A, %B %d, %Y")}})
 </div>
 
-    
+<form action='/add_comment' method="POST">
+
+
+<h3>Add a New Comment Below</h3>
+<textarea name="comments" id="comments" style="width:96%;height:90px;padding:2%;font:1.4em/1.6em cursive;">
+
+</textarea>
+<input type="submit" value="Add Comment" style="font-size: 14px;border:5px solid blue;background-color:white;color:brown;">
+    <input type="hidden" name="post_id" value="{{post.post_id}}">
+</form>
+
+<ul>
+    {% for comment in comments %}
+    <li>
+      {{ comment.text }}
+    </li>
+    {% endfor %}
+</ul>
+
+
+<!-- getting comments from route as well, so we can display them  -->
     
 
 {% endblock %}
