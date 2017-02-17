@@ -2,7 +2,7 @@
 {% block content %}
 
 <div>
-    {{ post.title }} {{ post.text}}
+    <h3>{{ post.title }} {{ post.text}}</h3>
     <img class="shoe-image" src="{{ post.img_url}}"/>
     ({{ post.added_at.strftime("%A, %B %d, %Y")}})
 </div>
