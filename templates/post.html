@@ -14,8 +14,8 @@
 <textarea name="comments" id="comments" style="width:96%;height:90px;padding:2%;font:1.4em/1.6em cursive;">
 
 </textarea>
-<input type="submit" value="Add Comment" style="font-size: 14px;border:5px solid blue;background-color:white;color:brown;">
-    <input type="hidden" name="post_id" value="{{post.post_id}}">
+ <button id="add-comment-button"><input type="submit" value="Add Comment" style="font-size: 14px;border:5px solid blue;background-color:white;color:brown;">
+    <input type="hidden" name="post_id" value="{{post.post_id}}"></button>
 </form>
 
 <ul>
@@ -25,9 +25,10 @@
     </li>
     {% endfor %}
 </ul>
-
-
-<!-- getting comments from route as well, so we can display them  -->
+<!-- LikeBtn.com BEGIN -->
+<span class="likebtn-wrapper" data-identifier="item_1"></span>
+<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+<!-- LikeBtn.com END -->
     
 
 {% endblock %}
