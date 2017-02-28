@@ -21,6 +21,8 @@ class User(db.Model):
     user_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(64), nullable=False)
     
@@ -28,8 +30,8 @@ class User(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<User user_id=%s email=%s>" % (self.user_id,
-                                               self.email)
+        return "<User user_id=%s first_name=%s last_name=%s email=%s>" % (self.user_id,
+                                    self.first_name, self.last_name, self.email)
 
 
 class Post(db.Model):
@@ -40,11 +42,12 @@ class Post(db.Model):
     post_id = db.Column(db.Integer,
                          autoincrement=True,
                          primary_key=True)
-    img_url = db.Column(db.String(300), nullable=True)
+    website_url = db.Column(db.String(800), nullable=True)
+    img_url = db.Column(db.String(800), nullable=True)
     added_at = db.Column(db.DateTime)
-    title = db.Column(db.String(300))
+    title = db.Column(db.String(800))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    text = db.Column(db.String(200))
+    text = db.Column(db.String(800))
 
     #Define relationship with User table 
     user = db.relationship("User", backref='posts')
@@ -52,7 +55,7 @@ class Post(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Post post_id=%s img_url=%s added_at=%s title=%s user_id=%s text=%s>" % (self.post_id, self.title, self.user_id,
+        return "<Post post_id=%s website_url=%s img_url=%s added_at=%s title=%s user_id=%s text=%s>" % (self.post_id, self.website_url, self.title, self.user_id,
                                                  self.img_url, self.added_at, self.text)
 
 
@@ -67,7 +70,7 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer,
                          db.ForeignKey('users.user_id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'))
-    text = db.Column(db.String(200))
+    comment = db.Column(db.String(1000))
     added_at = db.Column(db.DateTime)
 
     #Define a relationship to Users
@@ -81,9 +84,25 @@ class Comment(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        s = "<Comment comment_id=%s user_id=%s post_id=%s text=%s added_at=%s>"
+        s = "<Comment comment_id=%s user_id=%s post_id=%s comment=%s added_at=%s>"
         return s % (self.comment_id, self.user_id, self.post_id,
-                    self.text, self.added_at)
+                    self.comment, self.added_at)
+
+    def example_data():
+        """Create some sample data."""
+
+        img_url = "https://www.hautelookcdn.com/resizer/434x650/products/JS2005/large/6156640.jpg"
+    
+        added_at = datetime.now()
+        title = "Online Nordstrom Rack"
+        text = "Jessica Simpson Madison ballet flats only $29.99 usually $69.99"
+        user = User.query.filter_by(email="gracelee.durham@gmail.com").one()
+        user_id = user.user_id
+
+        post1 = Post(img_url=img_url, added_at=added_at, title=title, text=text, user_id=user_id)
+
+        db.session.add(post1)
+        db.session.commit()
 
 
 #####################################################################

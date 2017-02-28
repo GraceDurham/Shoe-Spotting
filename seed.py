@@ -21,11 +21,11 @@ def load_posts():
     """Load posts into database."""
     #deletes duplicates from the Post database when seed.py is ran
 
-    img_url = "http://a3.zassets.com/images/z/3/9/0/2/7/5/3902757-p-MULTIVIEW.jpg"
+    img_url = "https://www.hautelookcdn.com/resizer/434x650/products/JS2005/large/6156640.jpg"
     
     added_at = datetime.now()
-    title = "test post 1"
-    text = "Great shoes at Macy's"
+    title = "Online Nordstrom Rack"
+    text = "Jessica Simpson Madison ballet flats only $29.99 usually $69.99"
     user = User.query.filter_by(email="gracelee.durham@gmail.com").one()
     user_id = user.user_id
 

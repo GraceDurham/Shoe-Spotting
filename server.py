@@ -3,7 +3,7 @@
 from jinja2 import StrictUndefined
 import sqlalchemy
 
-from flask import Flask, render_template, request, flash, redirect, session, url_for
+from flask import Flask, render_template, request, flash, redirect, jsonify, session, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Post, Comment
@@ -27,30 +27,36 @@ def index():
     return render_template("welcome.html")
 
 
-# @app.route('/register', methods=['GET'])
-# def register_form():
-#     """Show form for user signup."""
+@app.route('/register', methods=['GET'])
+def register_form():
+    """Show form for user signup."""
 
-#     return render_template("register_form.html")
+    return render_template("register_form.html")
 
 
-# @app.route('/register', methods=['POST'])
-# def register_process():
-#     """Process registration."""
+@app.route('/register', methods=['POST'])
+def register_process():
+    """Process registration."""
 
-#     # Get form variables
-#     email = request.form["email"]
-#     password = request.form["password"]
-#     age = int(request.form["age"])
-#     zipcode = request.form["zipcode"]
+    # Get form variables
+    first_name = request.form["first name"]
+    last_name = request.form["last name"]
+    email = request.form["email"]
+    password = request.form["password"]
+    
+    new_user = User(email=email, password=password, first_name=first_name, last_name=last_name)
 
-#     new_user = User(email=email, password=password, age=age, zipcode=zipcode)
+    db.session.add(new_user)
+    db.session.commit()
 
-#     db.session.add(new_user)
-#     db.session.commit()
+    
+    # if session['rsvp'] = True:
+    #     flash("Yay! User %s added." % email)
+    #     return redirect("/")
 
-#     flash("User %s added." % email)
-#     return redirect("/")
+    # else:
+    #     flash("You have not registered. Please register.")
+    #     return redirect("/register")
 
 
 @app.route('/login', methods=['GET'])
@@ -69,7 +75,6 @@ def login_process():
     password = request.form["password"]
 
     user = User.query.filter_by(email=email).first()
-    print user.user_id
 
     if not user:
         flash("No such user")
@@ -130,17 +135,16 @@ def pop_add_post():
 def add_post():
     """add post to the database and return feed"""
 
-    print request.form
-
     img_url = request.form["img_url"]
     title = request.form["title"]
+    website_url = request.form["website_url"]
     text = request.form["text"]
 
     added_at = datetime.now()
 
     user_id = session["user_id"]
     
-    new_post = Post(img_url=img_url, title=title, text=text, user_id=user_id, added_at=added_at)
+    new_post = Post(img_url=img_url, title=title, website_url=website_url, text=text, user_id=user_id, added_at=added_at)
 
     db.session.add(new_post)
     db.session.commit()
@@ -149,23 +153,26 @@ def add_post():
     return redirect("/profile")
 
 
-@app.route('/add_comment', methods=['Post'])
+@app.route('/add-comment', methods=['POST'])
 def add_comment():
     """ add comment to the database"""
 
-    comments = request.form["comments"]
-    post_id = request.form["post_id"]
+
+    comments = request.form.get("comment")
+    post_id = request.form.get("post_id")
 
     added_at = datetime.now()
 
     user_id = session["user_id"]
+
     
-    new_comment = Comment(user_id=user_id, post_id=post_id, text=comments, added_at=added_at)
+    new_comment = Comment(user_id=user_id, post_id=post_id, comment=comments, added_at=added_at)
+
 
     db.session.add(new_comment)
     db.session.commit()
 
-    return redirect("/post/" + str(post_id))
+    return comments
 
 
 @app.route('/post/<int:post_id>')

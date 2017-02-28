@@ -1,26 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>Add Post</h1>
-    <form action="/add-post" method="POST">
-    <div>
-      <label>img url:
-        <input type="text" name="img_url">
-    </div>
-     <div>
-        <label>Title:
-          <input type="title" name="title">
-        </label>
-    </div>
-    <div>
-        <label>Comment:
-          <input type="text" name="text">
-        </label>
-    </div>
-    <div>
-        <input type="submit" value="Add Shoe Post">
-    </div>
+    <h1>Add Shoe Post</h1>
+    <form action="/add-post" method="POST" class= "form-horizontal">
+        <div class="form-group">
+            <label for="img_url" class="col-sm-2 control-label">Image URL</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="img_url" placeholder="Image URL"> 
+          </div>
+        </div> 
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Title</label>
+           <div class="col-sm-10">
+            <input type="text" class="form-control" name="title" placeholder="Title">
+          </div>
+        </div>
+         <div class="form-group">
+            <label for="website url" class="col-sm-2 control-label">Website URL</label>
+             <div class="col-sm-10">
+            <input type="text" name="website_url" class="form-control" placeholder="Website URL">
+             </div>
+        </div>
+         <div class="form-group">
+            <label for="text" class="col-sm-2 control-label">Text</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" name="text" placeholder="Text">
+            </div>
+        </div>
+
+        <div class="form-group">
+         <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Add Shoe Post</button>
+        </div>
+        </div>
     </form>
   
 {% endblock %}
+
 

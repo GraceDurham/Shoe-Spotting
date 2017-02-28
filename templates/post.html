@@ -7,27 +7,36 @@
     ({{ post.added_at.strftime("%A, %B %d, %Y")}})
 </div>
 
-<form action='/add_comment' method="POST">
-
-
-<h3>Add a New Comment Below</h3>
-<textarea name="comments" id="comments" style="width:96%;height:90px;padding:2%;font:1.4em/1.6em cursive;">
-
-</textarea>
- <button id="add-comment-button"><input type="submit" value="Add Comment" style="font-size: 14px;border:5px solid blue;background-color:white;color:brown;">
-    <input type="hidden" name="post_id" value="{{post.post_id}}"></button>
+<form id= "comment-form">
+  <div class ="form-group">
+    <h3><label for="type-field">Add New Comment Below</label></h3>
+      <ul>
+        <li>
+          <textarea name="comments" id="comments" style="width:96%;height:90px;padding:2%;font:1.4em/1.6em cursive;">
+          </textarea>
+        </li>
+      </ul>
+  </div>
+  <div>
+    <button type="button" id="comment-field" class="btn btn-success">Add Comment</button>
+    <input type="hidden" name="post_id" id="post_id" value="{{post.post_id}}">
+  </div>
 </form>
 
+<div id="add-comment-text"></div>
 <ul>
     {% for comment in comments %}
     <li>
-      {{ comment.text }}
+      {{ comment.comment }}
     </li>
     {% endfor %}
 </ul>
 <!-- LikeBtn.com BEGIN -->
 <span class="likebtn-wrapper" data-identifier="item_1"></span>
 <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="/static/ajax-comments.js"></script>
 <!-- LikeBtn.com END -->
     
 
