@@ -1,25 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>Your Profile Page</h1>
+    <h3>Your Profile Page</h3>
 
     <div>
-       <button type="button" class="btn btn-info"><a class="btn btn-info btn-lg"
-        href = "/add-post" role="button">Add Shoe Post</a></button>
+       <a class="btn btn-info btn-lg" href = "/add-post" role="button">Add Shoe Post</a>
     </div>
     <ul>
-    {% for post in posts %}
-    <div class="card">
-      <div class="card-block">
-      <li>
-          <a href="/post/{{ post.post_id }}">
-            <h3>{{ post.title }} {{ post.text}}</h3>
-            <img class="shoe-image" src="{{ post.img_url}}"/>
-            ({{ post.added_at.strftime("%A, %B %d, %Y")}})
-          </a>
-      </li>
-    </div>
-  </div>
-    {% endfor %}
+      {% for post in posts %}
+      <li class="shoe-entry">
+        <a href="/post/{{ post.post_id }}">
+          <h4>{{ post.title }} {{ post.text}}</h4>
+          <img class="shoe-image" src="{{ post.img_url}}"/>
 
+          <div>
+            {{ post.added_at.strftime("%A, %B %d, %Y")}}
+          </div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
 {% endblock %}
