@@ -22,6 +22,10 @@ li {
     cursor: pointer;
 }
 
+.shoe-entry:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 .navbar-inverse {
     border-color: #222;
 }
@@ -39,10 +43,6 @@ a {
 
 a:hover {
     color: #777;
-}
-
-.shoe-entry:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 a:hover {
