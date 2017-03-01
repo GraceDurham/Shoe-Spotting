@@ -1,44 +1,63 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="col-sm-6 col-sm-offset-2">
 <h1>Register</h1>
-
-<form action="register" method="POST">
-
-
-    <div>
-        <label>
-            First Name
-            <input type="first name" name="first name">
-        </label>
+<form class="form-horizontal" action="register" method="POST">
+    <div class="form-group">
+        <label for="First Name" class="col-sm-2 control-label">First Name</label>
+        <div class="col-sm-10">
+         <input type="first name" class="form-control" name="first name" placeholder="First Name">
+        </div>
     </div>
-
-    <div>
-        <label>
-            Last Name
-            <input type="last name" name="last name">
-        </label>
+    <div class="form-group">
+        <label for="Last Name" class="col-sm-2 control-label">Last Name</label>
+        <div class="col-sm-10">
+        <input type="last name" class="form-control" name="last name" placeholder="Last Name">
+        </div>
     </div>
-
-    <div>
-        <label>
-            Email
-            <input type="email" name="email">
-        </label>
+    <div class="form-group">
+        <label for="Email" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+        <input type="email" class="form-control" name="email" placeholder="Email">
+        </div>
     </div>
-
-    <div>
-        <label>
-            Password
-            <input type="password" name="password">
-        </label>
+    <div class="form-group">
+        <label for="Password" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+        <input type="password" class="form-control" name="password" placeholder="Password">
+        </div>
     </div>
-
-    <div>
-        <input type="submit" value="Register">
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" class="btn btn-info" type="submit" value="Register"></input>
+        </div>
     </div>
+</div> 
 
 </form>
 
 {% endblock %}
+
+
+      
+            
+                
+               
+                    <input type="email" class="form-control" name="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input class="btn btn-primary" type="submit" value="Log In">
+                </div>
+            </div>
+        </form>
+    </div>
 

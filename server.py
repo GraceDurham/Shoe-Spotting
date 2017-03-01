@@ -37,7 +37,7 @@ def register_form():
 @app.route('/register', methods=['POST'])
 def register_process():
     """Process registration."""
-
+    print "hello"
     # Get form variables
     first_name = request.form["first name"]
     last_name = request.form["last name"]
@@ -48,6 +48,9 @@ def register_process():
 
     db.session.add(new_user)
     db.session.commit()
+
+    flash("Yay! User %s added." % email)
+    return redirect ("/")
 
     
     # if session['rsvp'] = True:
