@@ -2,14 +2,12 @@
 {% block content %}
 
 <div class="shoe-entry">
-    <a href="/post/{{ post.post_id }}">
-      <h4>{{ post.title }} {{ post.text}}</h4>
-      <img class="shoe-image" src="{{ post.img_url}}"/>
+    <h4>{{ post.title }} {{ post.text}}</h4>
+    <img class="shoe-image" src="{{ post.img_url}}"/>
 
-      <div>
-        {{ post.added_at.strftime("%A, %B %d, %Y")}}
-      </div>
-    </a>
+    <div>
+      {{ post.added_at.strftime("%A, %B %d, %Y")}}
+    </div>
 </div>
 
 <form id= "comment-form">

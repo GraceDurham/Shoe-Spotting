@@ -3,26 +3,14 @@ ul, li{
     padding: 0;
 }
 
-.shoe-image {
-    max-width: 400px;
-    width: 100%;
-    margin: 10px 0;
-}
-
-.navbar-inverse {
-    background-color: #222;
-    border-color: #222;
-}
-
-.logo {
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    height: 52px;
-}
-
 li {
     list-style-type: none;
+}
+
+.shoe-image {
+    max-width: 500px;
+    width: 100%;
+    margin: 10px 0;
 }
 
 .shoe-entry {
@@ -34,8 +22,23 @@ li {
     cursor: pointer;
 }
 
+.navbar-inverse {
+    border-color: #222;
+}
+
+.logo {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: 52px;
+}
+
 a {
     color: #222;
+}
+
+a:hover {
+    color: #777;
 }
 
 .shoe-entry:hover {
