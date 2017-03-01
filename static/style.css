@@ -2,3 +2,15 @@
 
     height: 100px;
 }
+
+.navbar-inverse {
+    background-color: #222;
+    border-color: #222;
+}
+
+.logo {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: 52px;
+}
