@@ -20,12 +20,12 @@ app.secret_key = "ABC"
 # This is horrible. Fix this so that, instead, it raises an error.
 app.jinja_env.undefined = StrictUndefined
 
-@app.route('/')
-def feed():
-    """Gets posts for all the posts"""
-    posts = Post.query.all()
 
-    return render_template("shoefeed.html", posts=posts)
+@app.route('/')
+def index():
+    """Welcome page"""
+    return render_template("welcome.html")
+
 
 
 @app.route('/register', methods=['GET'])
@@ -111,6 +111,16 @@ def logout():
     return redirect("/")
 
 
+@app.route('/feed')
+def feed():
+    """Gets posts for all the posts"""
+    posts = Post.query.all()
+
+    return render_template("shoefeed.html", posts=posts)
+
+
+
+
 @app.route('/profile')
 def profile():
     """ User logs in and takes user to profile page"""
@@ -161,7 +171,7 @@ def add_comment():
 
     user_id = session["user_id"]
 
-    
+
     new_comment = Comment(user_id=user_id, post_id=post_id, comment=comments, added_at=added_at)
 
 

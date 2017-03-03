@@ -21,7 +21,7 @@
                           <span class="icon-bar"></span>
                           <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">
+                        <a class="navbar-brand" href="/feed">
                             <img class="logo" alt="Shoe Spotting" src="/static/shoe-spotting-logo.png" />
                         </a>
                     </div>
@@ -44,9 +44,11 @@
               {{ flash }}
             {% endfor %}
 
-            {% block content %}
-                Put your body here.
-            {% endblock %}
+            <div class="container">
+                {% block content %}
+                    Put your body here.
+                {% endblock %}
+            </div>
         </div>
     </body>
 </html>
