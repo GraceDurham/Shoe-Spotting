@@ -7,7 +7,7 @@ function showComment(result){
     var commentList = $("#comment-list");
     commentList.prepend(li);
 
-    $("#comments").val("")
+    $("#comments").val("");
 }
 
 function submitComment(evt){
