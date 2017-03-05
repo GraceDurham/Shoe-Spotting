@@ -9,6 +9,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Post, Comment
 
 from datetime import datetime
+from flask import jsonify
 
 
 app = Flask(__name__)
@@ -50,17 +51,8 @@ def register_process():
     db.session.add(new_user)
     db.session.commit()
 
-    flash("Yay! User %s added." % email)
+    flash("Yay! User %s %s added." % (first_name, last_name))
     return redirect ("/")
-
-    
-    # if session['rsvp'] = True:
-    #     flash("Yay! User %s added." % email)
-    #     return redirect("/")
-
-    # else:
-    #     flash("You have not registered. Please register.")
-    #     return redirect("/register")
 
 
 @app.route('/login', methods=['GET'])
@@ -164,7 +156,7 @@ def add_comment():
     """ add comment to the database"""
 
 
-    comments = request.form.get("comment")
+    comment = request.form.get("comment")
     post_id = request.form.get("post_id")
 
     added_at = datetime.now()
@@ -172,13 +164,14 @@ def add_comment():
     user_id = session["user_id"]
 
 
-    new_comment = Comment(user_id=user_id, post_id=post_id, comment=comments, added_at=added_at)
+    new_comment = Comment(user_id=user_id, post_id=post_id, comment=comment, added_at=added_at)
 
 
     db.session.add(new_comment)
     db.session.commit()
-
-    return comments
+    formatted_added_at = added_at.strftime("%b %d, %Y")
+    
+    return jsonify({"comment": comment, "added_at": formatted_added_at, "first_name": new_comment.user.first_name, "last_name": new_comment.user.last_name})
 
 
 @app.route('/post/<int:post_id>')
@@ -186,10 +179,7 @@ def show_post(post_id):
     # show the post with the given id, the id is an integer
     post = Post.query.get(post_id)
 
-
-    comments = Comment.query.filter_by(post_id=post_id).all() # filter comments by post_id, pass comments to template
-    
-    return render_template("post.html", post=post, comments=comments)
+    return render_template("post.html", post=post)
 
 
 if __name__ == "__main__":

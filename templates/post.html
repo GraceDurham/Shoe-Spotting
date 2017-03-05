@@ -9,14 +9,13 @@
       {{ post.added_at.strftime("%A, %B %d, %Y")}}
     </div>
 </div>
-
+ {% if "user_id" in session %}
 <form id= "comment-form">
   <div class ="form-group">
     <h3><label for="type-field">Add New Comment Below</label></h3>
       <ul>
         <li>
-          <textarea name="comments" id="comments" style="width:96%;height:90px;padding:2%;font:1.4em/1.6em cursive;">
-          </textarea>
+          <textarea name="comments" id="comments"></textarea>
         </li>
       </ul>
   </div>
@@ -25,11 +24,21 @@
     <input type="hidden" name="post_id" id="post_id" value="{{post.post_id}}">
   </div>
 </form>
+{%else%}
+<br/>
+<a href="/login">Login</a> to leave a comment.
+{% endif %}
+<hr>
 
-<div id="add-comment-text"></div>
-<ul>
-    {% for comment in comments %}
+<h3>Comments</h3>
+<ul id="comment-list">
+    {% for comment in post.comments|reverse %}
     <li>
+      <small>
+        <b>{{ comment.user.first_name }} {{ comment.user.last_name }} </b>
+        <i>{{ comment.added_at.strftime("%b %d, %Y") }} </i>
+      </small>
+      <br/>
       {{ comment.comment }}
     </li>
     {% endfor %}
