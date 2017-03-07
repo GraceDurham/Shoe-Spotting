@@ -73,8 +73,8 @@ def login_process():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        flash("No such user")
-        return redirect("/login")
+        flash("No such user please register first")
+        return redirect("/register")
 
     if user.password != password:
         flash("Incorrect password")
