@@ -11,7 +11,6 @@
 
     </head>
     <body>
-        <div class="container-fluid">
             <nav class="navbar navbar-inverse">
             <!-- <nav class="navbar navbar-default"> -->
                 <div class="container-fluid">
@@ -41,15 +40,16 @@
                 </div>
             </nav>
 
-            {% for flash in get_flashed_messages() %}
-              {{ flash }}
-            {% endfor %}
-
             <div class="container">
+                {% for flash in get_flashed_messages() %}
+                  {{ flash }}
+                {% endfor %}
+
+            
                 {% block content %}
                     Put your body here.
                 {% endblock %}
             </div>
-        </div>
+
     </body>
 </html>
