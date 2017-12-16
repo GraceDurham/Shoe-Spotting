@@ -6,7 +6,7 @@ Shoe spotting was created to entertain. It's a fun way of posting shoes from the
 ## Getting Started Set up your virtual machine with Vagrant 
 
 ```
-![alt text](https://raw.githubusercontent.com/GraceDurham/Welp/master/setup_vagrant.png)
+![Screen Shot of vagrant up](https://raw.githubusercontent.com/GraceDurham/ ShoeSpotter/master/setup_vagrant.png)
 ```
 
 
