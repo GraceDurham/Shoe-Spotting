@@ -42,6 +42,9 @@ python server.py
 
 open http://127.0.0.1:5000/
 
+### The Home Page
+
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/home_page.png)
 
 ## Using ShoeSpotting 
 
