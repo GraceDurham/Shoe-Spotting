@@ -8,6 +8,8 @@ Shoe spotting was created to entertain. It's a fun way of posting shoes from the
 
 ![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/setup_vagrant.png)
 
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/set_up_vagrant_continued.png)
+
 
 
 ```
