@@ -61,4 +61,14 @@ On login page please input your email and the password you just created to login
 
 ```
 
+### Your Profile Page 
+
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/your_profile_page.png)
+
+
+```
+Your profile page will eventually show you all the shoes that you collected from your web search after you post them individually.  Click on the add shoe post button.
+
+```
+
 
