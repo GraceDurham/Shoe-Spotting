@@ -101,3 +101,15 @@ In my example above I went to Macys.com and found a pair of flats that I love. A
 You can add a comment on the shoe post on the profile page by clicking the shoe image.  It will query the postgres database for that post id.  Type your comments in the add new comments box then click on the add new comment button to post your comments.  You can also add comments like this on other people's profiles.
 
 ```
+### Shoe Feed Page 
+
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/shoe_feed_page.png)
+
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/shoe_feed_page_continued.png)
+
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/shoe_feed_page_cont.png)
+
+```
+To get to the shoe feed page click on the silhouette and spot light of the black high heels in the upper left hand corner of the top nav bar. Shoe feed page displays all the shoe posts by all the users. If you see a pair that you like you can click on the image then add a comment on that user's shoe post. :)
+
+```
