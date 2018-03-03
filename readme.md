@@ -88,3 +88,6 @@ In my example above I went to Macys.com and found a pair of flats that I love. A
 5. Then click on the add shoe post button. This will post onto your profile page. 
 
 ```
+### Updated Profile Page After Shoe Post 
+
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/updated_profile_page_with_shoe_post.png)
