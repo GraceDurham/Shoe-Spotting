@@ -91,3 +91,13 @@ In my example above I went to Macys.com and found a pair of flats that I love. A
 ### Updated Profile Page After Shoe Post 
 
 ![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/updated_profile_page_with_shoe_post.png)
+
+### Comment on shoe post 
+
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/add_comment_shoe_post.png)
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/add_comment_shoe_post_continued.png)
+
+```
+You can add a comment on the shoe post on the profile page by clicking the shoe image.  It will query the postgres database for that post id.  Type your comments in the add new comments box then click on the add new comment button to post your comments.  You can also add comments like this on other people's profiles.
+
+```
