@@ -1,4 +1,4 @@
-# Shoespotting WIP Readme
+# Shoespotting Readme
 
 Shoe spotting was created to entertain. It's a fun way of posting shoes from the web and commenting on them. This app allows users to comment on their own posts and also comment on the posts of others. It's a great way of tracking shoes you've discovered on the web, and optionally tracking how much they cost. It's like Pinterest for shoes!
 
@@ -50,6 +50,14 @@ open http://127.0.0.1:5000/
 ![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/register_page.png)
 ```
 On register page please register as a user by inputting your first name, last name, email and password 
+
+```
+### Login Page 
+
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/login_page.png)
+
+```
+On login page please input your email and the password you just created to login into the site. 
 
 ```
 
