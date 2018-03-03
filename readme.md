@@ -46,6 +46,11 @@ open http://127.0.0.1:5000/
 
 ![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/home_page.png)
 
-## Using ShoeSpotting 
+### Register Page 
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/register_page.png)
+```
+On register page please register as a user by inputting your first name, last name, email and password 
+
+```
 
 
