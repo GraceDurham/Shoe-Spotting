@@ -70,5 +70,21 @@ On login page please input your email and the password you just created to login
 Your profile page will eventually show you all the shoes that you collected from your web search after you post them individually.  Click on the add shoe post button.
 
 ```
+### Add Shoe Post Page 
 
+![alt text](https://github.com/GraceDurham/Shoe-Spotting/blob/master/add_shoe_post_page.png)
 
+```
+In my example above I went to Macys.com and found a pair of flats that I love. After you have found the shoe that you want to add from the web follow steps below.
+
+1.On the image of the shoe press the control button and right click choose copy image address. Then paste this url into the image url box.
+
+2. In the title box type the name of the shoe and the designer's name. 
+
+3. In the website url box copy the the url of the website that you found the shoe.
+
+4. In the text box input the price of the shoe, name of the store, the colors available and most important if they have your size.  See example above.
+
+5. Then click on the add shoe post button. This will post onto your profile page. 
+
+```
